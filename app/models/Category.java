@@ -5,9 +5,7 @@ import javax.persistence.*;
 
 import com.avaje.ebean.Model;
 import play.data.validation.*;
-/**
- * Created by Gaming I5 PC on 30/11/2016.
- */
+
 @Entity
 public class Category extends Model{
 
@@ -17,7 +15,7 @@ public class Category extends Model{
     @Constraints.Required
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category() {
@@ -29,10 +27,20 @@ public class Category extends Model{
         this.setProducts(products);
     }
 
-    public static Finder<Long, Category> find = new Finder<Long, Category>(Category.class);
+    public static Finder<Long,Category> find = new Finder<Long, Category>(Category.class);
 
     public static List<Category> findAll() {
         return Category.find.where().orderBy("name asc").findList();
+    }
+    public static Map<String, String> options() {
+
+        LinkedHashMap<String, String> options = new LinkedHashMap<>();
+
+        for(Category c: Category.findAll()) {
+
+            options.put(c.getId().toString(), c.getName());
+        }
+        return options;
     }
 
     public Long getId() {

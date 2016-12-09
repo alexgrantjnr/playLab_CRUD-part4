@@ -17,11 +17,18 @@
 		@inputText(addProductForm("name"), '_label -> "Name",'class -> "form-control")
 		@inputText(addProductForm("category"), '_label -> "Category",'class -> "form-control")
 		@inputText(addProductForm("description"), '_label -> "Description",'class -> "form-control")
+		@select(
+			addProductForm("Category"),
+			options(Category.options),
+			'_lable -> "category", '_default -> "-- Chose a category --",
+			'_show -> false, 'class -> "form-controle"
+		)
 		@inputText(addProductForm("stock"), '_label -> "Stock",'class -> "form-control")
 		@inputText(addProductForm("price"), '_label -> "Price",'class -> "form-control")
 
 		<!-- Hidden ID field - required for product updates -->
 		@inputText(addProductForm("id"), '_label -> "", 'hidden -> "hidden")
+
 
 	<!-- Add a submit button -->
   <div class="actions">
